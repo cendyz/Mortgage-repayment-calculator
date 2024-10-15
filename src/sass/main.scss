@@ -1,0 +1,193 @@
+@use "./utilities/index" as *;
+
+:root {
+	--white: hsl(0, 0%, 100%);
+	--slate-100: hsl(202, 86%, 94%);
+	--slate-300: hsl(203, 41%, 72%);
+	--slate-500: hsl(200, 26%, 54%);
+	--slate-700: hsl(200, 24%, 40%);
+	--slate-900: hsl(202, 55%, 16%);
+}
+
+body {
+	display: flex;
+	justify-content: center;
+	font-size: 16px;
+	font-family: "Plus Jakarta Sans", sans-serif;
+	background-color: var(--white);
+}
+
+.main {
+	width: 100%;
+	max-width: 26em;
+	&__one {
+		padding: 1.5em;
+
+		&-title {
+			margin-bottom: 0.3em;
+			font-size: 2.2rem;
+			color: var(--slate-900);
+		}
+
+		&-btn {
+			margin-bottom: 1.3em;
+			text-decoration: underline;
+			color: var(--slate-700);
+			font-weight: 500;
+		}
+		&-label {
+			margin-bottom: 0.6em;
+			display: block;
+			font-size: 1.3rem;
+			color: var(--slate-700);
+			font-weight: 500;
+		}
+
+		&-container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-bottom: 1em;
+			border: 1px solid var(--slate-500);
+			border-radius: 0.3em;
+			overflow: hidden;
+
+			&-input,
+			&-second {
+				padding: 0.7em;
+				border: none;
+				width: 100%;
+				order: 1;
+				border: 1px solid transparent;
+				font-weight: 700;
+				color: var(--slate-900);
+				font-size: 1.5rem;
+				z-index: 10;
+
+				&:focus {
+					border: 1px solid royalblue;
+				}
+			}
+
+			&-second {
+				order: 0;
+			}
+
+			&-letter {
+				padding: 1em 1em;
+				@include input-text;
+				order: 0;
+			}
+
+			&-text {
+				padding: 1em 0.8em;
+				@include input-text;
+				order: 1;
+			}
+		}
+		&-checkbox {
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+			margin-bottom: 0.5em;
+			padding: 0.7em;
+			border: 1px solid var(--slate-500);
+			border-radius: 0.3em;
+			font-weight: 700;
+			color: var(--slate-900);
+			accent-color: hsl(61, 15%, 52%);
+
+
+			&-input {
+				margin-right: 1em;
+			}
+			
+			&-span {
+				font-size: 1.2rem;
+			}
+		}
+		&-calculate {
+			margin-top: 1.5em;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			column-gap: 0.5em;
+			padding: 0.9em 0;
+			width: 100%;
+			background-color: #d9db30;
+			border-radius: 1.5em;
+			font-size: 1.7rem;
+			font-weight: 700;
+			color: var(--slate-900);
+		}
+	}
+	&__two {
+		padding: 2em;
+		background-color: var(--slate-900);
+
+		&-first {
+			text-align: center;
+			&-img {
+				margin: 0 auto;
+			}
+
+			&-title {
+				margin-bottom: 1em;
+				color: var(--slate-100);
+			}
+
+			&-text {
+				color: var(--slate-300);
+				font-weight: 500;
+			}
+		}
+
+		&-second {
+			display: none;
+			color: var(--slate-100);
+
+			&-title {
+				margin-bottom: 1em;
+			}
+
+			&-text {
+				margin-bottom: 1em;
+				font-size: 1.65rem;
+				line-height: 1.5;
+				color: var(--slate-300);
+			}
+
+			&-box {
+				padding: 1em;
+				border-radius: 0.3em;
+				border-top: 3px solid #d9db30;
+				background-color: hsl(201, 80%, 12%);
+
+				&-text {
+					margin-bottom: 0.5em;
+					color: var(--slate-300);
+				}
+
+				&-repayments {
+					margin-bottom: 0.5em;
+					padding-bottom: 0.6em;
+					color: #d2d3b2;
+					font-weight: 700;
+					font-size: 3.5rem;
+					border-bottom: 1px solid var(--slate-700);
+				}
+
+				&-total {
+					font-size: 2rem;
+					font-weight: 700;
+				}
+			}
+		}
+	}
+}
+
+// - Mobile: 375px
+// - Desktop: 1440px
+
+// - Family: [Plus Jakarta Sans](https://fonts.google.com/specimen/Plus+Jakarta+Sans)
+// - Weights: 500, 700

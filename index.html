@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Page</title>
+		<link rel="icon" type="image/x-icon" href="./src/images/favicon-32x32.png" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+			rel="stylesheet" />
+		<link rel="stylesheet" href="./dist/css/main.css" />
+	</head>
+	<body>
+		<main class="main">
+			<div class="main__one">
+				<h1 class="main__one-title">Mortgage Calculator</h1>
+				<button class="main__one-btn">Clear All</button>
+				<label for="amount" class="main__one-label">Mortgage Amount</label>
+				<div class="main__one-container">
+					<input type="text" class="main__one-container-input" id="amount" />
+					<span class="main__one-container-letter">£</span>
+				</div>
+				<label for="term" class="main__one-label">Mortgage Term</label>
+				<div class="main__one-container main__one-second">
+					<input type="text" class="main__one-container-input main__one-container-second" id="term" />
+					<span class="main__one-container-text">years</span>
+				</div>
+				<label for="rate" class="main__one-label">Interest Rate</label>
+				<div class="main__one-container main__one-second">
+					<input type="text" class="main__one-container-input main__one-container-second" id="rate" />
+					<span class="main__one-container-text">%</span>
+				</div>
+				<label for="rate" class="main__one-label">Mortgage Type</label>
+				<div for="rate" class="main__one-checkbox">
+					<input type="radio" name="check-type" class="main__one-checkbox-input" id="checkbox-1" />
+					<label class="main__one-checkbox-span">Repayment</label>
+				</div>
+				<div for="rate" class="main__one-checkbox">
+					<input type="radio" name="check-type" class="main__one-checkbox-input" id="checkbox-2" />
+					<label class="main__one-checkbox-span">Interest Only</label>
+				</div>
+				<button class="main__one-calculate">
+					<img src="./src/images/icon-calculator.svg" alt="Calculator icon" />
+					Calculate Repayments
+				</button>
+			</div>
+			<div class="main__two">
+				<div class="main__two-first">
+					<img src="./src/images/illustration-empty.svg" alt="Calculator and notes" class="main__two-first-img" />
+					<h2 class="main__two-first-title">Results shown here</h2>
+					<p class="main__two-first-text">
+						Complete the form and click “calculate repayments” to see what your monthly repayments would be.
+					</p>
+				</div>
+				<div class="main__two-second">
+					<h2 class="main__two-second-title">Your results</h2>
+					<p class="main__two-second-text">
+						Your results are shown below based on the information you provided. To adjust the results, edit the form and
+						click “calculate repayments” again.
+					</p>
+					<div class="main__two-second-box">
+						<p class="main__two-second-box-text">Your monthly repayments</p>
+						<p class="main__two-second-box-repayments">£1,797.74</p>
+						<p class="main__two-second-box-text">Total you'll repay over the term</p>
+						<p class="main__two-second-box-total">£539,322.94</p>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<!-- Empty results start -->
+		<!-- 
+  Results shown here
+
+   -->
+
+		<!-- Empty results end -->
+
+		<!-- Completed results start -->
+
+		<!-- 
+
+  
+
+  
+
+  
+
+		<!-- Completed results end -->
+
+		<script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+		<script src="./src/main.js"></script>
+	</body>
+</html>
