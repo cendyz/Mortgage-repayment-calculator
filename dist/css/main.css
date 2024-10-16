@@ -169,6 +169,7 @@ body {
   background-color: var(--slate-900);
 }
 .main__two-first {
+  display: none;
   text-align: center;
 }
 .main__two-first-img {
@@ -183,7 +184,6 @@ body {
   font-weight: 500;
 }
 .main__two-second {
-  display: none;
   color: var(--slate-100);
 }
 .main__two-second-title {

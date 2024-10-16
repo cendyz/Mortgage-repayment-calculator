@@ -126,6 +126,7 @@ body {
 		background-color: var(--slate-900);
 
 		&-first {
+			display: none;
 			text-align: center;
 			&-img {
 				margin: 0 auto;
@@ -143,7 +144,7 @@ body {
 		}
 
 		&-second {
-			display: none;
+			// display: none;
 			color: var(--slate-100);
 
 			&-title {
