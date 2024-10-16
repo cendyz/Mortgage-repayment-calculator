@@ -6,9 +6,12 @@ const rateInput = document.querySelector("#rate");
 const inputs = [amountInput, rateInput, termInput];
 const btn = document.querySelector(".main__one-calculate");
 const clearBtn = document.querySelector(".main__one-btn");
+const secondOne = document.querySelector(".main__two-first");
+const secondTwo = document.querySelector(".main__two-second");
 const exceptComa = /^\d+(,\d+)*$/;
 const exceptDot = /^\d+(.\d+)*$/;
 const numbersOnly = /^\d+$/;
+
 const checkBox = e => {
 	const index = Array.from(checkBoxes).indexOf(e.target);
 	checkMain[index].style.backgroundColor = "#eff0c8";
@@ -25,6 +28,7 @@ const checkChecked = () => {
 	checkBoxes.forEach(box => {
 		if (box.checked === false) {
 			box.closest(".main__one-checkbox").style.backgroundColor = "white";
+			box.nextElementSibling.style.color = "hsl(200, 24%, 40%)";
 		}
 	});
 };
@@ -48,6 +52,19 @@ const checkInputs = (input, regex) => {
 		input.nextElementSibling.style.backgroundColor = "rgba(215,52,41,255)";
 		input.nextElementSibling.style.color = "white";
 	}
+
+	checkBoxes.forEach(input => {
+		if (input.checked === false) {
+			console.log("nie");
+		} else {
+			console.log("tak");
+		}
+	});
+};
+
+const calculate = () => {
+	secondOne.style.display = "none";
+	secondTwo.style.display = "block";
 };
 
 checkBoxes.forEach(box => box.addEventListener("click", checkBox));
@@ -60,7 +77,9 @@ btn.addEventListener("click", e => {
 	checkInputs(termInput, numbersOnly);
 	checkInputs(rateInput, exceptDot);
 
-	// console.log(rateInput.value + termInput.value);
+	if (checkInputs === true) {
+		calculate();
+	}
 });
 
 clearBtn.addEventListener("click", clearAll);
@@ -78,7 +97,19 @@ amountInput.addEventListener("input", function () {
 	}
 	this.value = value;
 
-	const numericValue = parseFloat(this.value.replace(/,/g, ""));
+	const numericAmount = parseFloat(this.value.replace(/,/g, ""));
+});
+
+termInput.addEventListener("input", function () {
+	let value = this.value;
+
+	let numericTerm = parseFloat(this.value);
+	if (numericTerm > 40) {
+		value = "40";
+		numericTerm = 40;
+	}
+
+	this.value = value;
 });
 
 rateInput.addEventListener("input", function () {
@@ -87,4 +118,6 @@ rateInput.addEventListener("input", function () {
 		value = value.slice(0, 1) + "." + value.slice(1);
 	}
 	this.value = value;
+
+	const numericRate = parseFloat(this.value);
 });

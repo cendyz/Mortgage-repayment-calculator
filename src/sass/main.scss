@@ -12,14 +12,16 @@
 body {
 	display: flex;
 	justify-content: center;
+	align-items: center;
 	font-size: 16px;
 	font-family: "Plus Jakarta Sans", sans-serif;
-	background-color: var(--white);
+	background-color: var(--slate-100);
 }
 
 .main {
 	width: 100%;
 	max-width: 26em;
+	background-color: var(--white);
 	&__one {
 		padding: 1.5em;
 
@@ -74,13 +76,12 @@ body {
 			}
 
 			&-letter {
-				padding: 1em 1em;
 				@include input-text;
+				padding: 1em 1.2em;
 				order: 0;
 			}
 
 			&-text {
-				padding: 1em 0.8em;
 				@include input-text;
 				order: 1;
 			}
@@ -97,11 +98,10 @@ body {
 			color: var(--slate-900);
 			accent-color: hsl(61, 15%, 52%);
 
-
 			&-input {
 				margin-right: 1em;
 			}
-			
+
 			&-span {
 				font-size: 1.2rem;
 			}
@@ -126,7 +126,6 @@ body {
 		background-color: var(--slate-900);
 
 		&-first {
-			display: none;
 			text-align: center;
 			&-img {
 				margin: 0 auto;
@@ -144,7 +143,7 @@ body {
 		}
 
 		&-second {
-			// display: none;
+			display: none;
 			color: var(--slate-100);
 
 			&-title {
@@ -187,8 +186,139 @@ body {
 	}
 }
 
-// - Mobile: 375px
-// - Desktop: 1440px
+@media (min-width: 1440px) {
+	.main {
+		display: grid;
+		place-items: center;
+		grid-template-columns: 1fr 1fr;
+		max-width: 54em;
+		border-radius: 1.3em;
+		overflow: hidden;
 
-// - Family: [Plus Jakarta Sans](https://fonts.google.com/specimen/Plus+Jakarta+Sans)
-// - Weights: 500, 700
+		&__one {
+			display: grid;
+			grid-template-columns: repeat(auto-fit);
+			grid-template-areas:
+				"title btn"
+				"form form";
+			row-gap: 2em;
+			padding: 2em;
+			width: 100%;
+
+			&-title {
+				grid-area: title;
+			}
+
+			&-btn {
+				grid-area: btn;
+				justify-self: flex-end;
+				margin-bottom: 0;
+			}
+
+			&-container {
+				transition: border 0.2s;
+
+				&:hover {
+					border: 1px solid #232b2d;
+				}
+			}
+
+			&-checkbox {
+				transition: border 0.2s;
+
+				&:hover {
+					border: 1px solid #cbcf8c;
+				}
+			}
+
+			.form {
+				display: grid;
+				grid-template-columns: repeat(auto-fit);
+				grid-template-areas:
+					"lab1 lab1"
+					"con1 con1"
+					"lab2 lab3"
+					"con2 con3"
+					"lab4 lab4"
+					"con4 con4"
+					"con5 con5"
+					"btn btn";
+				column-gap: 1.3em;
+				grid-area: form;
+				width: 100%;
+
+				&__label {
+					&-one {
+						grid-area: lab1;
+					}
+					&-two {
+						grid-area: lab2;
+					}
+					&-three {
+						grid-area: lab3;
+					}
+					&-four {
+						grid-area: lab4;
+					}
+				}
+				&__input {
+					&-one {
+						grid-area: con1;
+					}
+					&-two {
+						grid-area: con2;
+					}
+					&-three {
+						grid-area: con3;
+					}
+					&-four {
+						grid-area: con4;
+					}
+					&-five {
+						grid-area: con5;
+					}
+				}
+				&__btn {
+					grid-area: btn;
+					transition: background-color 0.2s;
+
+					&:hover {
+						background-color: #ebee97;
+					}
+				}
+			}
+
+			&-calculate {
+				padding: 0.8em 0;
+				width: 70%;
+				font-size: 1.4rem;
+			}
+		}
+
+		&__two {
+			height: 100%;
+			border-bottom-left-radius: 5em;
+			&-first {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				height: 100%;
+
+				&-img {
+					width: 35%;
+				}
+
+				&-title {
+					margin-top: 0.7em;
+					font-size: 2rem;
+				}
+
+				&-text {
+					font-size: 1.35rem;
+					line-height: 1.5;
+				}
+			}
+		}
+	}
+}
