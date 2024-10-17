@@ -58,7 +58,12 @@ const clearAll = () => {
 const checkInputs = (input, regex) => {
 	let isValid = regex.test(input.value);
 
-	if (isValid) {
+	if (amountInput.value.length < 7) {
+		amountInput.nextElementSibling.style.backgroundColor = "rgba(215,52,41,255)";
+		amountInput.nextElementSibling.style.color = "white";
+	}
+
+	if (isValid && !input.value.startsWith(0)) {
 		input.nextElementSibling.style.backgroundColor = "hsl(202, 86%, 94%)";
 		input.nextElementSibling.style.color = "hsl(200, 24%, 40%)";
 	} else {
@@ -107,8 +112,9 @@ const calculate = () => {
 		checkPlaceHolder();
 	} else if (monthlyRest.length === 5) {
 		repaymentAmount.textContent = `£${monthlyFirst}${monthlyRest}`;
-		totalPayment.textContent = `£${allToPayFirst},${allToPayEnd}`;``
-		showCalculate()
+		totalPayment.textContent = `£${allToPayFirst},${allToPayEnd}`;
+		``;
+		showCalculate();
 	} else {
 		repaymentAmount.textContent = `£${monthlyFirst},${monthlyRest}`;
 		totalPayment.textContent = `£${allToPayFirst},${allToPayEnd}`;
@@ -175,9 +181,13 @@ rateInput.addEventListener("input", function () {
 
 	if (value.length > 1) {
 		value = value.slice(0, 1) + "." + value.slice(1);
-		if ((value.length = 4)) {
-			value = value.slice(0, 4);
-		}
 	}
+
+	// if ((value.length = 5)) {
+	// 	value = value.slice(0, 2) + "." + value.slice(2);
+	// 	value = value.slice(0, 5);
+	// 	console.log(value.length);
+	// }
+
 	this.value = value;
 });
