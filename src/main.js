@@ -84,6 +84,11 @@ const checkPlaceHolder = () => {
 	}
 };
 
+const showCalculate = () => {
+	secondOne.style.display = "none";
+	secondTwo.style.display = "block";
+};
+
 const calculate = () => {
 	const numericAmount = parseFloat(amountInput.value.replace(/,/g, ""));
 	const r = rateInput.value / 100 / 12;
@@ -100,12 +105,14 @@ const calculate = () => {
 
 	if (amountInput.value < 100000) {
 		checkPlaceHolder();
+	} else if (monthlyRest.length === 5) {
+		repaymentAmount.textContent = `£${monthlyFirst}${monthlyRest}`;
+		totalPayment.textContent = `£${allToPayFirst},${allToPayEnd}`;``
+		showCalculate()
 	} else {
 		repaymentAmount.textContent = `£${monthlyFirst},${monthlyRest}`;
 		totalPayment.textContent = `£${allToPayFirst},${allToPayEnd}`;
-
-		secondOne.style.display = "none";
-		secondTwo.style.display = "block";
+		showCalculate();
 	}
 };
 
