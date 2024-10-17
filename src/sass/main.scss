@@ -66,8 +66,15 @@ body {
 				font-size: 1.5rem;
 				z-index: 10;
 
+				&:first-child {
+					&::placeholder {
+						color: rgba(215, 52, 41, 255);
+					}
+				}
+
 				&:focus {
-					border: 1px solid royalblue;
+					outline: none;
+					border: 1px solid black;
 				}
 			}
 
@@ -126,7 +133,10 @@ body {
 		background-color: var(--slate-900);
 
 		&-first {
-			text-align: center;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
 			&-img {
 				margin: 0 auto;
 			}
@@ -299,10 +309,6 @@ body {
 			height: 100%;
 			border-bottom-left-radius: 5em;
 			&-first {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				flex-direction: column;
 				height: 100%;
 
 				&-img {
@@ -317,6 +323,32 @@ body {
 				&-text {
 					font-size: 1.35rem;
 					line-height: 1.5;
+				}
+			}
+
+			&-second {
+				&-title {
+					margin-bottom: 0.5em;
+				}
+
+				&-text {
+					margin-bottom: 2.3em;
+					font-size: 1.4rem;
+				}
+
+				&-box {
+					padding: 1.5em;
+					&-text {
+						margin-bottom: 1em;
+						font-size: 1.25rem;
+					}
+					&-repayments {
+						margin-bottom: 0.7em;
+						font-size: 4.2rem;
+					}
+					&-total {
+						font-size: 1.8rem;
+					}
 				}
 			}
 		}

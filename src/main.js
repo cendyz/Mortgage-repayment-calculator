@@ -1,20 +1,27 @@
 const checkMain = document.querySelectorAll(".main__one-checkbox");
 const checkBoxes = document.querySelectorAll(".main__one-checkbox-input");
+const topInputCont = document.querySelectorAll(".main__one-container-input");
 const amountInput = document.querySelector("#amount");
 const termInput = document.querySelector("#term");
 const rateInput = document.querySelector("#rate");
 const inputs = [amountInput, rateInput, termInput];
+const radioOne = document.querySelector("#checkbox-1");
+const radioTwo = document.querySelector("#checkbox-2");
 const btn = document.querySelector(".main__one-calculate");
 const clearBtn = document.querySelector(".main__one-btn");
 const secondOne = document.querySelector(".main__two-first");
 const secondTwo = document.querySelector(".main__two-second");
+const repaymentAmount = document.querySelector(".main__two-second-box-repayments");
+const totalPayment = document.querySelector(".main__two-second-box-total");
 const exceptComa = /^\d+(,\d+)*$/;
 const exceptDot = /^\d+(.\d+)*$/;
 const numbersOnly = /^\d+$/;
 
 const checkBox = e => {
 	const index = Array.from(checkBoxes).indexOf(e.target);
+	const child = checkMain[index].querySelector(".main__one-checkbox-span");
 	checkMain[index].style.backgroundColor = "#eff0c8";
+	child.style.color = "hsl(202, 55%, 16%)";
 	checkChecked();
 };
 
@@ -34,6 +41,10 @@ const checkChecked = () => {
 };
 
 const clearAll = () => {
+	secondOne.style.display = "flex";
+	secondTwo.style.display = "none";
+	topInputCont[0].placeholder = "";
+
 	inputs.forEach(el => {
 		el.value = "";
 		el.nextElementSibling.style.backgroundColor = "hsl(202, 86%, 94%)";
@@ -45,7 +56,9 @@ const clearAll = () => {
 };
 
 const checkInputs = (input, regex) => {
-	if (regex.test(input.value)) {
+	let isValid = regex.test(input.value);
+
+	if (isValid) {
 		input.nextElementSibling.style.backgroundColor = "hsl(202, 86%, 94%)";
 		input.nextElementSibling.style.color = "hsl(200, 24%, 40%)";
 	} else {
@@ -54,30 +67,69 @@ const checkInputs = (input, regex) => {
 	}
 
 	checkBoxes.forEach(input => {
-		if (input.checked === false) {
-			console.log("nie");
-		} else {
-			console.log("tak");
+		if (radioOne.checked === false && radioTwo.checked === false) {
+			input.closest(".main__one-checkbox").style.backgroundColor = "rgba(215,52,41,255)";
+			input.nextElementSibling.style.color = "white";
+			isValid = false;
 		}
 	});
+
+	return isValid;
+};
+
+const checkPlaceHolder = () => {
+	if (amountInput.value < 100000) {
+		topInputCont[0].value = "";
+		topInputCont[0].placeholder = "Must be minimum 100,000";
+	}
 };
 
 const calculate = () => {
-	secondOne.style.display = "none";
-	secondTwo.style.display = "block";
+	const numericAmount = parseFloat(amountInput.value.replace(/,/g, ""));
+	const r = rateInput.value / 100 / 12;
+	const n = termInput.value * 12;
+	const square = (1 + r) ** n;
+	const monthly = (numericAmount * square * r) / (square - 1);
+	const shortMonthly = monthly.toFixed(2);
+	const monthlyFirst = shortMonthly.charAt(0);
+	const monthlyRest = shortMonthly.slice(1);
+	const allToPay = monthly * n;
+	const allToPayFixed = allToPay.toFixed(2);
+	const allToPayFirst = allToPayFixed.slice(0, 3);
+	const allToPayEnd = allToPayFixed.slice(3);
+
+	if (amountInput.value < 100000) {
+		checkPlaceHolder();
+	} else {
+		repaymentAmount.textContent = `£${monthlyFirst},${monthlyRest}`;
+		totalPayment.textContent = `£${allToPayFirst},${allToPayEnd}`;
+
+		secondOne.style.display = "none";
+		secondTwo.style.display = "block";
+	}
 };
 
 checkBoxes.forEach(box => box.addEventListener("click", checkBox));
+
+checkMain.forEach(main => {
+	main.addEventListener("click", () => {
+		const childInput = main.querySelector(".main__one-checkbox-input");
+		childInput.nextElementSibling.style.color = "hsl(202, 55%, 16%)";
+		main.style.backgroundColor = "#eff0c8";
+		childInput.checked = true;
+		checkChecked();
+	});
+});
 
 resetCheckboxes();
 
 btn.addEventListener("click", e => {
 	e.preventDefault();
-	checkInputs(amountInput, exceptComa);
-	checkInputs(termInput, numbersOnly);
-	checkInputs(rateInput, exceptDot);
+	const isAmountValid = checkInputs(amountInput, exceptComa);
+	const isTermValid = checkInputs(termInput, numbersOnly);
+	const isRateValid = checkInputs(rateInput, exceptDot);
 
-	if (checkInputs === true) {
+	if (isAmountValid && isTermValid && isRateValid) {
 		calculate();
 	}
 });
@@ -92,32 +144,33 @@ window.addEventListener("DOMContentLoaded", () => {
 
 amountInput.addEventListener("input", function () {
 	let value = this.value.replace(/,/g, "");
+
 	if (value.length > 3) {
 		value = value.slice(0, 3) + "," + value.slice(3);
+		if ((value.length = 7)) {
+			value = value.slice(0, 7);
+		}
 	}
 	this.value = value;
-
-	const numericAmount = parseFloat(this.value.replace(/,/g, ""));
 });
 
 termInput.addEventListener("input", function () {
 	let value = this.value;
-
-	let numericTerm = parseFloat(this.value);
-	if (numericTerm > 40) {
-		value = "40";
-		numericTerm = 40;
+	if (value > 50) {
+		value = "50";
 	}
 
 	this.value = value;
 });
 
 rateInput.addEventListener("input", function () {
-	let value = this.value.replace(/\./g, "");
+	let value = this.value.replace(/,/g, "").replace(/\./g, "");
+
 	if (value.length > 1) {
 		value = value.slice(0, 1) + "." + value.slice(1);
+		if ((value.length = 4)) {
+			value = value.slice(0, 4);
+		}
 	}
 	this.value = value;
-
-	const numericRate = parseFloat(this.value);
 });
