@@ -61,11 +61,14 @@ const checkInputs = (input, regex) => {
 	if (amountInput.value.length < 7) {
 		amountInput.nextElementSibling.style.backgroundColor = "rgba(215,52,41,255)";
 		amountInput.nextElementSibling.style.color = "white";
+		amountInput.value = "";
+		amountInput.placeholder = "Must be minimum 100,000";
 	}
 
 	if (isValid && !input.value.startsWith(0)) {
 		input.nextElementSibling.style.backgroundColor = "hsl(202, 86%, 94%)";
 		input.nextElementSibling.style.color = "hsl(200, 24%, 40%)";
+		amountInput.placeholder = "";
 	} else {
 		input.nextElementSibling.style.backgroundColor = "rgba(215,52,41,255)";
 		input.nextElementSibling.style.color = "white";
@@ -177,17 +180,15 @@ termInput.addEventListener("input", function () {
 });
 
 rateInput.addEventListener("input", function () {
-	let value = this.value.replace(/,/g, "").replace(/\./g, "");
+	let value = this.value.replace(/[^0-9]/g, "");
 
-	if (value.length > 1) {
-		value = value.slice(0, 1) + "." + value.slice(1);
+	if (value.length >= 4) {
+		value = value.slice(0, 2) + "." + value.slice(2, 4);
+	} else if (value.length === 3) {
+		value = value.slice(0, 1) + "." + value.slice(1, 3); 
+	} else if (value.length === 2) {
+		value = value.slice(0, 1) + "." + value.slice(1); 
 	}
-
-	// if ((value.length = 5)) {
-	// 	value = value.slice(0, 2) + "." + value.slice(2);
-	// 	value = value.slice(0, 5);
-	// 	console.log(value.length);
-	// }
 
 	this.value = value;
 });
